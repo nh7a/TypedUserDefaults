@@ -1,0 +1,2 @@
+# TypedUserDefaults
+Strictly Typed UserDefaults
