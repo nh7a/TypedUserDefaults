@@ -34,3 +34,53 @@ public extension UserDefaults {
         }
     }
 }
+
+// MARK: - Special treatment for Bool, Int, Float, Double, and URL
+public extension UserDefaults {
+    
+    public subscript(key: DefaultKey<Bool>) -> Bool {
+        set { set(newValue, forKey: key.string) }
+        get {
+            return object(forKey: key.string) == nil ?
+                key.defaultValue : bool(forKey: key.string)
+        }
+    }
+    
+    public subscript(key: DefaultKey<Int>) -> Int {
+        set { set(newValue, forKey: key.string) }
+        get {
+            return object(forKey: key.string) == nil ?
+                key.defaultValue : integer(forKey: key.string)
+        }
+    }
+    
+    public subscript(key: DefaultKey<Float>) -> Float {
+        set { set(newValue, forKey: key.string) }
+        get {
+            return object(forKey: key.string) == nil ?
+                key.defaultValue : float(forKey: key.string)
+        }
+    }
+    
+    public subscript(key: DefaultKey<Double>) -> Double {
+        set { set(newValue, forKey: key.string) }
+        get {
+            return object(forKey: key.string) == nil ?
+                key.defaultValue : double(forKey: key.string)
+        }
+    }
+
+    public subscript(key: DefaultKey<URL>) -> URL {
+        set { set(newValue, forKey: key.string) }
+        get {
+            return url(forKey: key.string) ?? key.defaultValue
+        }
+    }
+
+    public subscript(key: OptionalKey<URL>) -> URL? {
+        set { set(newValue, forKey: key.string) }
+        get {
+            return url(forKey: key.string)
+        }
+    }
+}
