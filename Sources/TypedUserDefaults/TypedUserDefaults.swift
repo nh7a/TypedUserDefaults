@@ -33,6 +33,15 @@ public extension UserDefaults {
             return object(forKey: key.string) as? T
         }
     }
+
+    public subscript(key: OptionalKey<Float>) -> Float? {
+        set { set(newValue, forKey: key.string) }
+        get {
+            // `object(forKey: key.string) as? Float` no longer works since Swift 4.2
+            guard let dbl = object(forKey: key.string) as? Double else { return nil }
+            return Float(dbl)
+        }
+    }
 }
 
 // MARK: - Special treatment for Bool, Int, Float, Double, and URL
